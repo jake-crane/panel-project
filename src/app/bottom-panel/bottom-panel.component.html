@@ -1,5 +1,4 @@
-<div #parent class="d-flex flex-column" style="height:500px;">
-<div class="top blue flex-fill">fill remaining space</div>
 <div #dragBar class="middle green" (mousedown)="onDragBarMouseDown($event)"></div>
-<div class="bottom red" [style.height.px]="panelHeight">resizable, starting at 300px</div>
+<div class="bottom red" [style.height.px]="panelHeight">
+  <ng-content></ng-content>
 </div>

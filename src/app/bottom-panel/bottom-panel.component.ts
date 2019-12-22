@@ -10,8 +10,7 @@ export class BottomPanelComponent implements OnInit {
 
   @ViewChild('dragBar', { static: true }) dragBar: ElementRef;
   private resizingPanel = false;
-  panelHeight = 250;
-  @Input() parent;
+  panelHeight = 100;
 
   constructor() {
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -22,7 +21,7 @@ export class BottomPanelComponent implements OnInit {
   }
 
   private getBottomPanelHeight(pageMouseY): number {
-    return this.parent.scrollHeight - pageMouseY - this.dragBar.nativeElement.offsetHeight / 2;
+    return this.dragBar.nativeElement.parentElement.parentElement.scrollHeight - pageMouseY - this.dragBar.nativeElement.offsetHeight / 2;
   }
 
   onDragBarMouseDown(e) {
@@ -37,7 +36,12 @@ export class BottomPanelComponent implements OnInit {
     if (this.resizingPanel) {
       e.preventDefault();
       const newHeight = this.getBottomPanelHeight(e.pageY);
-      if (newHeight > 20)
+      // const parent = this.dragBar.nativeElement.parentElement.parentElement;
+      // const topElement = parent.firstElementChild;
+      // const newTotalHeight = topElement.offsetHeight + this.dragBar.nativeElement.offsetHeight + newHeight;
+      // const maxHeight = parent.offsetHeight - topElement.offsetHeight - this.dragBar.nativeElement.offsetHeight;
+      // const parentWillOverflow = newTotalHeight > parent.offsetHeight;
+      if (newHeight > 0)
         this.panelHeight = newHeight;
     }
   }

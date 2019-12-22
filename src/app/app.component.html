@@ -1,3 +1,6 @@
-<div #parent class="d-flex flex-column" style="height:500px;">
-  <app-bottom-panel [parent]="parent"></app-bottom-panel>
+<div #parent class="d-flex flex-column" style="height:200px;">
+  <div class="flex-fill">fill remaining space</div>
+  <app-bottom-panel>
+    resizable content here
+  </app-bottom-panel>
 </div>
