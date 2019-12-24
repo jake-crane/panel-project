@@ -28,3 +28,7 @@ body {
 .text-center {
   text-align: center;
 }
+
+.cursor-ns-resize {
+  cursor: ns-resize;
+}

@@ -1,8 +1,23 @@
-.middle {
-  cursor: ns-resize;
-  border: 1px solid black;
-}
-
 .red {
   border: 2px solid red;
+}
+
+.green {
+  border: 1px solid green;
+}
+
+.center-line {
+  text-align: center;
+  position: relative;
+}
+
+.center-line:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-top: 1px solid #c8c8c8;
+  width: 100%;
+  transform: translateY(-50%);
+  z-index: -1;
 }
