@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'app-bottom-panel',
-  templateUrl: './bottom-panel.component.html',
-  styleUrls: ['./bottom-panel.component.css']
+  selector: 'app-horizontal-pane-splitter',
+  templateUrl: './horizontal-pane-splitter.component.html',
+  styleUrls: ['./horizontal-pane-splitter.component.css']
 })
-export class BottomPanelComponent implements OnInit {
-
+export class HorizontalPaneSplitterComponent implements OnInit {
 
   @ViewChild('dragBar', { static: true }) dragBar: ElementRef;
   private resizingPanel = false;
@@ -52,6 +51,6 @@ export class BottomPanelComponent implements OnInit {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseleave', this.cancelResize);
     document.removeEventListener('mouseup', this.cancelResize);
-  }
+  } s
 
 }

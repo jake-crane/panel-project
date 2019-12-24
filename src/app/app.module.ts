@@ -2,12 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { BottomPanelComponent } from './bottom-panel/bottom-panel.component';
+import { HorizontalPaneSplitterComponent } from './horizontal-pane-splitter/horizontal-pane-splitter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BottomPanelComponent
+    HorizontalPaneSplitterComponent
   ],
   imports: [
     BrowserModule
