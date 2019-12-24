@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'app-horizontal-pane-splitter',
   templateUrl: './horizontal-pane-splitter.component.html',
   styleUrls: ['./horizontal-pane-splitter.component.css']
 })
-export class HorizontalPaneSplitterComponent implements OnInit {
-
+export class HorizontalPaneSplitterComponent implements OnInit, AfterContentInit {
   @ViewChild('dragBar', { static: true }) dragBar: ElementRef;
   private resizingPanel = false;
-  panelHeight = 100;
+  bottomPanelHeight = 100;
+  topPanelHeight: number;
   showBottom = true;
 
   constructor() {
@@ -18,11 +18,22 @@ export class HorizontalPaneSplitterComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
-  private getBottomPanelHeight(pageMouseY): number {
-    const parent = this.dragBar.nativeElement.parentElement.parentElement.parentElement;
-    return parent.scrollHeight - pageMouseY - this.dragBar.nativeElement.offsetHeight / 2;
+  ngAfterContentInit() {
+    const parentHeight = this.getParentHeight();
+    this.topPanelHeight = parentHeight - this.dragBar.nativeElement.offsetHeight - this.bottomPanelHeight;
+  }
+
+  private getParentHeight() {
+    return this.dragBar.nativeElement.parentElement.parentElement.parentElement.offsetHeight;
+  }
+
+  private getNewHeights(pageMouseY, parentHeight) {
+    const newBottomHeight = parentHeight - pageMouseY - this.dragBar.nativeElement.offsetHeight / 2;
+    const newTopHeight = parentHeight - newBottomHeight;
+    return { newBottomHeight, newTopHeight };
   }
 
   onDragBarMouseDown(e) {
@@ -36,14 +47,15 @@ export class HorizontalPaneSplitterComponent implements OnInit {
   onMouseMove(e) {
     if (this.resizingPanel) {
       e.preventDefault();
-      const newHeight = this.getBottomPanelHeight(e.pageY);
+      const parentHeight = this.getParentHeight();
+      const newHeights = this.getNewHeights(e.pageY, parentHeight);
       // const parent = this.dragBar.nativeElement.parentElement.parentElement;
       // const topElement = parent.firstElementChild;
       // const newTotalHeight = topElement.offsetHeight + this.dragBar.nativeElement.offsetHeight + newHeight;
       // const maxHeight = parent.offsetHeight - topElement.offsetHeight - this.dragBar.nativeElement.offsetHeight;
       // const parentWillOverflow = newTotalHeight > parent.offsetHeight;
-      if (newHeight > 0)
-        this.panelHeight = newHeight;
+      this.bottomPanelHeight = newHeights.newBottomHeight;
+      this.topPanelHeight = newHeights.newTopHeight;
     }
   }
 
