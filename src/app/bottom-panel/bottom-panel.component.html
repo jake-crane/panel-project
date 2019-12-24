@@ -1,4 +1,9 @@
-<div #dragBar class="middle green" (mousedown)="onDragBarMouseDown($event)"></div>
-<div class="bottom red" [style.height.px]="panelHeight">
-  <ng-content></ng-content>
+<div #parent class="d-flex flex-column h-100">
+  <div class="flex-fill">
+    <ng-content select="[top]"></ng-content>
+  </div>
+  <div #dragBar class="middle green" (mousedown)="onDragBarMouseDown($event)"></div>
+  <div class="bottom red" [style.height.px]="panelHeight">
+    <ng-content select="[bottom]"></ng-content>
+  </div>
 </div>

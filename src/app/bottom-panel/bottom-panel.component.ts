@@ -21,7 +21,8 @@ export class BottomPanelComponent implements OnInit {
   }
 
   private getBottomPanelHeight(pageMouseY): number {
-    return this.dragBar.nativeElement.parentElement.parentElement.scrollHeight - pageMouseY - this.dragBar.nativeElement.offsetHeight / 2;
+    const parent = this.dragBar.nativeElement.parentElement.parentElement.parentElement;
+    return parent.scrollHeight - pageMouseY - this.dragBar.nativeElement.offsetHeight / 2;
   }
 
   onDragBarMouseDown(e) {
