@@ -10,6 +10,7 @@ export class HorizontalPaneSplitterComponent implements OnInit {
   @ViewChild('dragBar', { static: true }) dragBar: ElementRef;
   private resizingPanel = false;
   panelHeight = 100;
+  showBottom = true;
 
   constructor() {
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -51,6 +52,14 @@ export class HorizontalPaneSplitterComponent implements OnInit {
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseleave', this.cancelResize);
     document.removeEventListener('mouseup', this.cancelResize);
-  } s
+  }
+
+  hideBottomPanel() {
+    this.showBottom = false;
+  }
+
+  showBottomPanel() {
+    this.showBottom = true;
+  }
 
 }

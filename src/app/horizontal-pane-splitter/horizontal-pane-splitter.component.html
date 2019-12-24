@@ -2,10 +2,11 @@
   <div class="flex-fill">
     <ng-content select="[top]"></ng-content>
   </div>
-  <div #dragBar class="middle green" (mousedown)="onDragBarMouseDown($event)">
-    <ng-content select="[middle]"></ng-content>
+  <div #dragBar class="middle green justify-content-center text-center" (mousedown)="onDragBarMouseDown($event)">
+    <button (click)="hideBottomPanel()" *ngIf="showBottom">down</button>
+    <button (click)="showBottomPanel()" *ngIf="!showBottom">up</button>
   </div>
-  <div class="red" [style.height.px]="panelHeight">
+  <div class="red" *ngIf="showBottom" [style.height.px]="panelHeight">
     <ng-content select="[bottom]"></ng-content>
   </div>
 </div>

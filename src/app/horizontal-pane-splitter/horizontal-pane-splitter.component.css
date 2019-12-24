@@ -1,12 +1,8 @@
 .middle {
   cursor: ns-resize;
-  height: 10px;
-}
-
-.green {
-  background-color: green;
+  border: 1px solid black;
 }
 
 .red {
-  background-color: red;
+  border: 2px solid red;
 }
