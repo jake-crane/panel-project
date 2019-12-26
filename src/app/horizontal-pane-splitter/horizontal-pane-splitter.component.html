@@ -1,5 +1,5 @@
 <div #parent class="d-flex flex-column h-100">
-  <div class="flex-fill">
+  <div class="flex-fill overflow-hidden">
     <ng-content select="[top]"></ng-content>
   </div>
   <div #dragBar class="green justify-content-center text-center center-line" [class.cursor-ns-resize]="showBottom"
@@ -7,7 +7,7 @@
     <button (click)="hideBottomPanel()" *ngIf="showBottom">down</button>
     <button (click)="showBottomPanel()" *ngIf="!showBottom">up</button>
   </div>
-  <div class="red" *ngIf="showBottom" [style.height.px]="panelHeight">
+  <div class="red overflow-hidden" *ngIf="showBottom" [style.height.px]="panelHeight">
     <ng-content select="[bottom]"></ng-content>
   </div>
 </div>
