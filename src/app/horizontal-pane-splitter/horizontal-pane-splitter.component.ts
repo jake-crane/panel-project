@@ -12,7 +12,7 @@ export class HorizontalPaneSplitterComponent implements OnInit {
   panelHeight = 100;
   showBottom = true;
   @Input()
-  parent;
+  parent: HTMLElement;
 
   constructor() {
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -23,7 +23,7 @@ export class HorizontalPaneSplitterComponent implements OnInit {
   }
 
   getBottomPanelHeight(pageMouseY): number {
-    const parentMouseY = pageMouseY - this.parent.offsetTop;
+    const parentMouseY = pageMouseY - this.parent.getBoundingClientRect().top;
     return this.parent.scrollHeight - parentMouseY - this.getHalfDragBarHeight();
   }
 
