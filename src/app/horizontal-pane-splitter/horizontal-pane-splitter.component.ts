@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 
 @Component({
   selector: 'app-horizontal-pane-splitter',
@@ -11,6 +11,8 @@ export class HorizontalPaneSplitterComponent implements OnInit {
   private resizingPanel = false;
   panelHeight = 100;
   showBottom = true;
+  @Input()
+  parent;
 
   constructor() {
     this.onMouseMove = this.onMouseMove.bind(this);
@@ -20,9 +22,13 @@ export class HorizontalPaneSplitterComponent implements OnInit {
   ngOnInit() {
   }
 
-  private getBottomPanelHeight(pageMouseY): number {
-    const parent = this.dragBar.nativeElement.parentElement.parentElement.parentElement;
-    return parent.scrollHeight - pageMouseY - this.dragBar.nativeElement.offsetHeight / 2;
+  getBottomPanelHeight(pageMouseY): number {
+    const parentMouseY = pageMouseY - this.parent.offsetTop;
+    return this.parent.scrollHeight - parentMouseY - this.getHalfDragBarHeight();
+  }
+
+  getHalfDragBarHeight() {
+    return this.dragBar.nativeElement.offsetHeight / 2;
   }
 
   onDragBarMouseDown(e) {
@@ -42,8 +48,7 @@ export class HorizontalPaneSplitterComponent implements OnInit {
       // const newTotalHeight = topElement.offsetHeight + this.dragBar.nativeElement.offsetHeight + newHeight;
       // const maxHeight = parent.offsetHeight - topElement.offsetHeight - this.dragBar.nativeElement.offsetHeight;
       // const parentWillOverflow = newTotalHeight > parent.offsetHeight;
-      if (newHeight > 0)
-        this.panelHeight = newHeight;
+      this.panelHeight = newHeight;
     }
   }
 

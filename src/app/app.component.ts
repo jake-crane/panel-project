@@ -7,4 +7,5 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 })
 export class AppComponent {
   title = 'panel-project';
+  @ViewChild('parent', { static: true }) parent: ElementRef;
 }

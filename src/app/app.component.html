@@ -1,5 +1,6 @@
-<div style="height:600px; border:1px solid blue;">
-  <app-horizontal-pane-splitter>
+<div style="height:100px; border:1px solid skyblue;"> content before splitter test</div>
+<div #parent style="height:600px; border:1px solid blue;">
+  <app-horizontal-pane-splitter [parent]="parent">
     <div top>top content</div>
     <div bottom>bottom content</div>
   </app-horizontal-pane-splitter>
